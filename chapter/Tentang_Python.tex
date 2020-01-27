@@ -88,6 +88,131 @@ perulangan terdiri atas 3 kondisi.
 \end{enumerate}
 Pada penulisan sintaks While dan For harus memperhatikan identasi (baris yang menjorok ke dalam), jika tidak diperhatikan dengan baik maka akan terjadi error terhadap identasi. Untuk menambahkan identasi dapat menggunakan spasi atau tab.
 
+\subsection{Looping For}
+Seperti di bahasa pemrograman lainnya, Python juga memiliki fungsi for. Bedanya di Python, For tidak hanya untuk perulangan dengan jumlah finite (terbatas), melainkan lebih ke fungsi yang dapat melakukan perulangan pada setiap jenis variabel berupa kumpulan atau urutan. Variabel yang dimaksud bisa berupa list, string, ataupun range. Jika sebuah list atau urutan berisi expression, maka Ia akan dievaluasi terlebih dahulu. Kemudian item pertama pada urutan atau list akan diassign sebagai variabel iterating\_var. Setelahnya, blok statement akan dieksekusi, berlanjut ke item berikutnya, berulang, hingga seluruh urutan habis.
+contoh for:
+\begin{verbatim}
+for letter in 'Python':  # First Example
+    print('Current Letter: {}'.format(letter))
+fruits = ['banana', 'apple', 'mango']
+for fruit in fruits:  # Second Example
+    print('Current fruit: {}'.format(fruit))
+\end{verbatim}
+Output:
+\begin{verbatim}
+Current Letter : P
+Current Letter : y
+Current Letter : t
+Current Letter : h
+Current Letter : o
+Current Letter : n
+Current fruit : banana
+Current fruit : apple
+Current fruit : mango
+\end{verbatim}
+Anda juga dapat melakukan perulangan berdasarkan indeks atau range dengan memanfaatkan fungsi len():
+\begin{verbatim}
+fruits = ['banana', 'apple', 'mango']
+for index in range(len(fruits)):
+    print('Current fruit: {}'.format(fruits[index]))
+\end{verbatim}
+Output:
+\begin{verbatim}
+Current fruit : banana
+Current fruit : apple
+Current fruit : mango
+\end{verbatim}
+
+\subsection{While}
+While pada bahasa Python digunakan untuk mengeksekusi statement selama kondisi yang diberikan terpenuhi (True). Kondisi dapat berupa expression apapun, dan harap diingat bahwa True di Python termasuk semua nilai non-zero. Saat kondisi menjadi False, program akan melanjutkan ke baris setelah blok statement.\\
+Seperti for dan semua statement percabangan, blok statement yang mengikuti kondisi while dan memiliki posisi indentasi yang sama, dianggap blok statement yang akan dieksekusi.
+
+Contoh:
+\begin{verbatim}
+count = 0
+while (count < 5):
+    print('The count is: {}'.format(count))
+    count = count + 1
+\end{verbatim}
+Output:
+\begin{verbatim}
+The count is: 0
+The count is: 1
+The count is: 2
+The count is: 3
+The count is: 4
+\end{verbatim}
+Seperti pada bahasa lainnya, eksekusi statement while mungkin bersifat infinit / infinite loop saat sebuah kondisi tidak pernah bernilai False. Contohnya sebagai berikut:
+\begin{verbatim}
+var = 1
+while var == 1:  # This constructs an infinite loop
+    num = input('Enter a number: ')
+    print('You entered: {}'.format(num))
+ 
+ 
+while True:  # This constructs an infinite loop
+    num = input('Enter a number: ')
+    print('You entered: {}'.format(num))
+\end{verbatim}
+Potongan kode di atas tidak akan pernah bernilai False karena nilai var tidak pernah berubah. Untuk menghentikan infinite loop, gunakan CTRL (atau CMD) - C untuk menghentikannya dan keluar dari program.
+
+Anda juga dapat menyingkat penulisan blok statement While jika statement Anda cukup terwakili oleh satu baris.
+\begin{verbatim}
+while (var1): do_something()
+\end{verbatim}
+
+\subsection{Perulangan Bertingkat}
+Ada kalanya Anda perlu untuk melakukan perulangan bertingkat, misalnya untuk menghasilkan contoh print-out berikut:
+
+\begin{verbatim}
+*****
+****
+***
+**
+*
+\end{verbatim}
+
+Contoh:
+\begin{verbatim}
+for i in range(0, 5):
+    for j in range(0, 5 - i):
+        print('*', end='')
+    print()
+\end{verbatim}
+
+\subsection{Break}
+Pernyataan break menghentikan perulangan kemudian keluar, dilanjutkan dengan mengeksekusi pernyataan (statement) setelah blok perulangan. Salah satu penggunaannya yang paling sering adalah sebuah kondisi eksternal yang membutuhkan program untuk keluar dari perulangan. Jika Anda memiliki perulangan bertingkat, break akan menghentikan perulangan sesuai dengan tingkatan atau di perulangan mana ia berada. Namun jika ia diletakkan di perulangan dengan kedalaman kedua misalnya, hanya perulangan itu saja yang berhenti, tidak dengan perulangan utama.
+Contoh 1:
+\begin{verbatim}
+for letter in 'Python':
+    if letter == 'h':
+        break
+    print('Current letter: {}'.format(letter))
+\end{verbatim}
+Output contoh 1:
+\begin{verbatim}
+Current Letter : P
+Current Letter : y
+Current Letter : t
+\end{verbatim}
+Contoh 2:
+\begin{verbatim}
+var = 10 
+while var > 0:             
+    print('Current variable value: {}'.format(var))
+    var = var - 1
+    if var == 5:
+        break
+\end{verbatim}
+Output contoh 2:
+\begin{verbatim}
+Current variable value : 10
+Current variable value : 9
+Current variable value : 8
+Current variable value : 7
+Current variable value : 6
+\end{verbatim}
+
 \subsection{IF Statement}
 kondisi if dapat digunakan didalam looping dan dapat digunakan untuk memberikan kondisi tertentu dengan cara mengetikkan if lalu kondisi yang akan terjadi.\\
 \begin{enumerate}
@@ -100,6 +225,84 @@ kondisi if dapat digunakan didalam looping dan dapat digunakan untuk memberikan 
 \item Nested if merupakan if didalam if (if bersarang), terdapat dua if didalam satu kondisi. Contoh: variabel x sama dengan 41, kondisi pertama yaitu jika x besar dari 10 maka tampilkan lebih besar dari 10, kondisi kedua yaitu jika x besar dari 20, maka tampilkan lebih besar dari 20, jika salah maka tampilkan tidak melebihi 20.
 \lstinputlisting[caption=Nested If , language=Python, firstline=61, lastline=69]{src/teori.py}
 \end{enumerate}
+contoh if statement:
+\begin{verbatim}
+var1 = 100
+if var1:
+   print ("1 - Got a true expression value")
+   print (var1)
+var2 = 0
+if var2:
+   print ("2 - Got a true expression value")
+   print (var2)
+\end{verbatim}
+Output:
+\begin{verbatim}
+1 - Got a true expression value
+100
+\end{verbatim}
+
+\subsection{ELSE statement}
+Statement Else dapat dikombinasikan dengan IF Statement, sebagai jalan keluar saat kondisi / hasil evaluasi bernilai False. Else bersifat opsional dan tunggal.
+contoh else statement:
+\begin{verbatim}
+amount = int(input("Enter amount: "))
+if amount<1000:
+   discount = amount*0.05
+   print ("Discount",discount)
+else:
+   discount = amount*0.10
+   print ("Discount",discount)
+   
+print ("Net payable:",amount-discount)
+\end{verbatim}
+Output true:
+\begin{verbatim}
+Enter amount: 600
+Discount 30.0
+Net payable: 570.0
+\end{verbatim}
+Output false:
+\begin{verbatim}
+Enter amount: 1200
+Discount 120.0
+Net payable: 1080.0
+\end{verbatim}
+
+\subsection{Elif}
+Alternatif untuk Switch/Case dan IF bertingkat di python. Elif adalah kependekan dari else if, dan merupakan alternatif untuk if bertingkat atau switch/case di beberapa bahasa pemrograman lain. Sebuah IF Statement dapat diikuti satu atau lebih statement elif (opsional dan tidak dibatasi).
+contoh elif:
+\begin{verbatim}
+amount = int(input("Enter amount: "))
+if amount<1000:
+   discount = amount*0.05
+   print ("Discount",discount)
+elif amount<5000:
+   discount = amount*0.10
+   print ("Discount",discount)
+else:
+   discount = amount*0.15
+   print ("Discount",discount)
+print ("Net payable:",amount-discount)
+\end{verbatim}
+Output true if:
+\begin{verbatim}
+Enter amount: 600
+Discount 30.0
+Net payable: 570.0
+\end{verbatim}
+Output true elif:
+\begin{verbatim}
+Enter amount: 3000
+Discount 300.0
+Net payable: 2700.0
+\end{verbatim}
+Output false:
+\begin{verbatim}
+Enter amount: 6000
+Discount 900.0
+Net payable: 5100.0
+\end{verbatim}
 
 \section{Praktek Pertama Python}
 \subsection{Modulus}
