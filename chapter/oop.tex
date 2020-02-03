@@ -1,0 +1,506 @@
+Kelas atau dalam bahasa Inggris disebut class, merupakan sebuah konsep yang menyediakan sarana untuk menyatukan data dan fungsionalitas secara satu kesatuan. Membuat sebuah kelas artinya membuat sebuah tipe baru, kemudian dengan membuat instance dari kelas tersebut akan menghasilkan objek baru dari tipe tersebut. Setiap objek (hasil instance dari kelas tersebut) dapat memiliki atribut untuk mengelola status dari objek tersebut, juga dapat memiliki metode untuk mengubah status atau informasinya.\\
+
+Catatan:\\
+
+Kata objek adalah terjemahan bahasa Inggris dari kata object.\\
+
+Kata metode adalah terjemahan bahasa Inggris dari kata method.\\
+Selanjutnya kita akan mempelajari secara mendalam implementasi kelas dan fitur-fitur terkait di bahasa pemrograman Python.\\
+
+\section{Class}
+Class merupakan sintaksis di Python yang menyediakan semua fitur-fitur standar dari Pemrograman Berorientasi Objek atau dalam bahasa Inggris disebut dengan Object Oriented Programming (OOP).\\
+
+Definisi dari kelas menggunakan sintaksis class seperti hanya definisi fungsi yang menggunakan sintaksis def, kemudian perlu dipanggil (dieksekusi) dahulu sebelum dapat digunakan dan memiliki efek pada program.\\
+\begin{lstlisting}[language=Python]
+class NamaKelas:
+    pass  # gantikan dengan pernyataan-pernyataan, misal: atribut atau metode
+\end{lstlisting}
+
+Pada pemanggilan sintaksis class tersebut, setelah seluruh pernyataan-pernyataan semuanya selesai diproses (didaftarkan sebagai atribut ataupun metode), maka kelas sudah dibuat dan dapat digunakan.\\
+
+Sebuah kelas sendiri mendukung dua macam operasi:
+\begin{enumerate}
+\item Mengacu pada atribut
+\item Pembuatan instance atau dalam bahasa Inggris disebut instantiation
+\end{enumerate}
+
+Agar lebih jelas, kita akan membahas menggunakan contoh berikut.\\
+
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana"""
+    i = 12345
+ 
+    def f(self):
+        return 'hello world'
+\end{lstlisting}
+
+Dari pembuatan class Kalkulator di atas, di dalamnya ada definisi atribut i dan definisi fungsi f.\\
+
+Proses mengacu atribut yaitu Kalkulator.i dan Kalkulator.f sesuai definisi akan mengembalikan nilai integer dan fungsi. Pada proses mengacu atribut tersebut juga dapat mengubah nilainya, misalnya dengan memberikan bilangan bulat lain ke Kalkulator.i akan mengubah nilai yang ada saat ini.\\
+\begin{lstlisting}[language=Python]
+Kalkulator.i = 1024  # maka nilai atribut i dalam Kalkulator berubah dari 12345 menjadi 1024
+\end{lstlisting}
+
+\section{Menulis Method dan Kelas pada Python}
+
+Module Python adalah berkas teks berekstensi .py yang berisikan kode Python. Anda dapat mereferensi berkas .py apa pun sebagai modul. Modul-modul umum yang disediakan oleh Python Standard Library dan mungkin sudah terinstal secara default pada instalasi Python Anda. PIP juga dapat dimanfaatkan untuk menginstal modul atau library berikut dengan dependensi yang dibutuhkannya. Anda pun dapat membuat dan menghasilkan modul Python Anda sendiri.
+
+\subsection{Menulis Modul}
+
+Menuliskan modul pada bahasa Python dapat dimulai dengan menuliskan definisi fungsi, kelas, dan variabel yang dapat digunakan kembali pada program lainnya. Misalkan saja kita membuat berkas hello.py yang akan kita panggil di berkas lain.\\
+
+hello.py
+\begin{lstlisting}[language=Python]
+# Define a function
+def world():
+    print("Hello, World!")
+\end{lstlisting}
+
+Jika hello.py dijalankan, maka program tidak akan menjalankan apapun karena world() hanya berupa definisi fungsi, kita belum memanggilnya. Jika kita biasanya memanggil sebuah fungsi dari berkas yang sama di bagian main, kali ini kita akan membuat berkas lain main.py yang seolah mengimpor hello.py. Pastikan hello.py dan main.py berada dalam satu direktori agar dapat diimpor dan dipanggil.\\
+
+main.py
+\begin{lstlisting}[language=Python]
+#impor
+import hello
+#panggil
+hello.world()
+\end{lstlisting}
+
+Saat memanggil sebuah fungsi dari modul yang kita impor, jangan lupa untuk menambahkan nama modulnya diikuti tanda titik, baru fungsi yang akan kita panggil. Dalam hal ini karena kita mengimpor hello.py, maka cukup kita tulis import hello, dan saat memanggilnya dengan hello.world(). Selain itu, kita juga dapat menggunakan from ... import ..., dalam hal ini adalah from hello import world dan memanggil fungsinya langsung yakni world().\\
+
+Sekarang, saat memanggil main.py, maka akan menghasilkan:\\
+
+Hello, World!\\
+
+\subsection{Menambahkan variabel}
+Menambahkan variabel pada modul hello, tambahkan variabel nama, misalnya Dicoding.\\
+
+hello.py
+\begin{lstlisting}[language=Python]
+def world():
+    print("Hello, World!")
+nama = "Dicoding"
+\end{lstlisting}
+
+Berikutnya, kita coba cetak variabel nama.\\
+
+main.py
+\begin{lstlisting}[language=Python]
+#impor
+import hello
+ 
+#panggil
+hello.world()
+#cetak
+print(hello.nama)
+\end{lstlisting}
+
+Saat Dijalankan:\\
+
+Hello, World!\\
+Dicoding\\
+
+\subsection{Menambahkan kelas}
+
+Contoh yang lain, mari tambahkan kelas di modul hello. Kita akan membuat kelas Reviewer dengan atribut nama dan kelas, serta fungsi review() yang akan mencetak atribut yang telah didefinisikan.\\
+
+hello.py
+
+\begin{lstlisting}[language=Python]
+def world():
+    print("Hello, World!")
+nama = "Dicoding"
+class Reviewer:
+    def __init__(self, nama, kelas):
+        self.nama = nama
+        self.kelas = kelas
+    def review(self):
+        print("Reviewer " + self.nama + " bertanggung jawab di kelas " + self.kelas)
+\end{lstlisting}
+
+Tambahkan kelas pada main.py\\
+
+main.py
+\begin{lstlisting}[language=Python]
+#impor
+import hello
+#panggil
+hello.world()
+#cetak
+print(hello.nama)
+#review
+diko = hello.Reviewer("Diko", "Python")
+diko.review()
+\end{lstlisting}
+
+Seperti umumnya kelas pada bahasa pemrograman lainnya, Fungsi dan Atributnya dapat diakses setelah kita melakukan instansiasi. Fungsi Review adalah fungsi yang melekat pada kelas Reviewer. Kita juga dapat memanggil diko.Nama atau diko.Kelas sebagai atribut yang melekat di kelas tersebut.\\
+
+Output:\\
+
+Hello, World!\\
+Dicoding\\
+Reviewer Diko bertanggung jawab di kelas Python\\
+
+Lihat kedua variabel "nama" yang dapat menghasilkan dua nilai berbeda, karena nama yang pertama (hello.nama) melekat pada modul, sementara diko. Nama adalah atribut nama pada kelas Reviewer. Anda harus cukup berhati-hati dalam memastikan variabel seperti pada pembahasan fungsi yang lalu.\\
+
+\subsection{Implementasi Kode}
+Seringkali, modul dimanfaatkan untuk dapat memisahkan antara definisi dan implementasi kode. Namun modul juga dapat berfungsi selayaknya program pada umumnya, yang juga langsung mengeksekusi dalam modul itu sendiri. Contohnya, kita buat hello2.py seperti berikut:\\
+
+hello2.py
+\begin{lstlisting}[language=Python]
+# Definisi
+def world():
+    print("Hello, World!")
+# Panggil disini
+world()
+\end{lstlisting}
+
+Kemudian bersihkan main.py hingga menyisakan import hello saja.\\
+
+main\_program.py
+\begin{lstlisting}[language=Python]
+import hello
+\end{lstlisting}
+
+Saat main\_program dijalankan, langsung muncul:\\
+
+Hello, World!\\
+
+Sehingga modul dapat digunakan dengan berbagai metode pemanggilan, bergantung pada definisi, maupun implementasi.
+
+\subsection{Mengakses Modul dari Folder Lain}
+
+Jika Anda bekerja dengan beberapa proyek secara paralel, berikut adalah opsi untuk mengakses modul dari folder lain:\\
+\begin{enumerate}
+\item Menambahkan path folder\\
+Opsi ini dipilih umumnya di tahap awal pengembangan, sebagai solusi temporer. Untuk mengetahui path pemanggilan utama, Anda perlu bantuan dari modul sys yang sudah tersedia. Impor modul sys di main program dan gunakan fungsi sys.path.append. Berikut contoh jika berkas hello.py kita berada di direktori /home/dicoding/ dan main.py di direktori lainnya, pada Anda akan menambahkan path /home/dicoding pada main.py dengan cara:
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append('/home/dicoding')
+import hello
+\end{lstlisting}
+\item Menambahkan modul pada Python Path\\
+Alternatif ini dapat dipilih saat Anda melakukan pemanggilan modul >1x. Pada intinya pilihan ini akan menambahkan modul yang Anda buat pada Path yang diperiksa oleh Python sebagai modul dan paket-paket bawaan. Anda dapat memanfaatkan sys.path kembali untuk mengetahui posisi Anda saat ini.\\
+
+print(sys.path)\\
+Anda mungkin akan menerima output seperti berikut, sangat bergantung dengan jenis environment Anda, tapi pilihlah (atau cobalah satu per satu) jika ada beberapa output.\\
+
+'/home/dicoding/my\_env/lib/python3.5/site-packages'\\
+Pindahkan hello.py pada direktori di atas. Maka Ia akan dikenali sebagai sebuah modul yang dapat diimpor oleh siapa saja dalam environment tersebut.\\
+
+Pada main\_program.py cukup impor.\\
+
+import hello\\
+
+
+Pastikan path yang Anda assign tepat untuk menghasilkan pemanggilan yang tepat. Modul yang tersebar pada beberapa folder mungkin akan menghasilkan galat. Usahakan peletakan yang se-sederhana mungkin.\\
+\end{enumerate}
+
+\section{Objek (object: an instance of a class)}
+
+embahasan berikutnya adalah instantiation dari sebuah class, menggunakan notasi fungsi yaitu dengan kurung buka-kurung tutup, akan menghasilkan sebuah objek. Kemudian hasil instantiation ini biasanya disimpan dalam sebuah variabel dengan nama yang representatif.\\
+
+Berikut ini adalah contoh membuat instance dari class Kalkulator menghasilkan sebuah objek.
+\begin{verbatim}
+k = Kalkulator()  # membuat instance dari kelas jadi objek, kemudian disimpan pada variabel k
+\end{verbatim}
+
+Sebagai hasil instance sebuah class, suatu objek memiliki atribut dan metode yang didapatkan dari class. Sebuah metode atau dalam bahasa Inggris disebut method, adalah sebuah fungsi khusus yang menjadi "milik" suatu objek.\\
+
+Untuk memanggil metode f dari objek k, hasil instance dari class Kalkulator di atas sebagai berikut.
+\begin{verbatim}
+k.f()  # akan mencetak hello world ke layar
+\end{verbatim}
+
+Kenapa metode adalah sebuah fungsi khusus?\\
+Jika diperhatikan kembali fungsi f dalam definisi class Kalkulator memiliki satu argumen bernama self, sedangkan dalam pemanggilan metode dari objek k di atas tidak menggunakan argumen. Apabila f adalah fungsi biasa pada Python tentu pemanggilan ini akan mengembalikan kesalahan (error). Lebih detail mengenai konvensi ini akan dibahas pada bagian metode dari class.\\
+
+Pembahasan lebih lanjut mengenai metode dari class ada di bagian selanjutnya.\\
+
+\section{Class’ Constructor}
+
+Kembali membahas proses instantiation dari class, sering ditemui kebutuhan mengeset nilai awal atau kondisi awal dari atribut yang dimiliki oleh class tersebut, sehingga untuk kebutuhan ini digunakan sebuah fungsi khusus yang biasa disebut sebagai pembangun atau dalam bahasa Inggris disebut constructor. Di Python, fungsi khusus atau metode sebagai constructor ini bernama \_\_init\_\_ atau biasa diucapkan sebagai "double underscore init". Pada saat dilakukan instantiation dari class, metode \_\_init\_\_ ini secara otomatis akan dipanggil di terlebih dahulu.\\
+
+Berikut adalah definisi class Kalkulator di atas jika diubah dengan menggunakan constructor.
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana"""
+ 
+    def __init__(self):
+        self.i = 12345
+ 
+    def f(self):
+        return 'hello world'
+\end{lstlisting}
+
+Nilai dari atribut i tidak terdefinisi pada awal definisi Kalkulator, setelah dilakukan instantiation maka nilai atribut i akan bernilai 12345. Meskipun bisa mendefinisikan variabel i sebagai atribut dari class Kalkulator, tetapi sebaiknya berhati-hati mengenai variabel yang akan terbagi (shared) untuk semua instance dari class, terutama untuk tipe yang dapat berubah (mutable), misalnya list dan dictionary.
+
+\begin{lstlisting}[language=Python]
+class KeranjangBelanja:
+    """contoh tidak baik dilakukan dengan definisi variabel terbagi"""
+    isi = []  # menggunakan list di sini akan terbagi untuk semua instance. JANGAN DILAKUKAN
+\end{lstlisting}
+
+Lanjut pembahasan constructor, dengan dilengkapi constructor pun proses instantiation tidak berubah dari sebelumnya.
+\begin{lstlisting}[language=Python]
+k = Kalkulator()  # membuat instance dari kelas jadi objek, kemudian disimpan pada variabel k
+\end{lstlisting}
+
+Lebih lanjut tentang constructor, tentu saja untuk mendukung aplikasi yang lebih dinamis maka constructor dapat memiliki parameter yang bisa dikirimkan saat proses instantiation, bahkan parameternya bisa lebih dari satu jika diperlukan.\\
+
+Pada contoh berikut ini, constructor memiliki parameter i yang bersifat opsional, apabila dalam proses instantiation tidak dikirimkan parameter, secara otomatis i akan diisi nilai bawaan 12345.
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana"""
+ 
+    def __init__(self, i=12345):
+        self.i = i  # i adalah variabel pada constructor, self.i adalah variabel dari class
+ 
+    def f(self):
+        return 'hello world'
+\end{lstlisting}
+
+Dengan contoh pemanggilan berikut.
+
+\begin{lstlisting}[language=Python]
+k = Kalkulator(i=1024)  # melakukan instantiation sekaligus mengisi atribut i jadi 1024
+print(k.i)              # mencetak atribut i dari objek k dengan keluaran nilai 1024
+\end{lstlisting}
+
+\section{Metode (Method)}
+Pembahasan lebih detail mengenai metode, selain yang dibahas sebelumnya, kita akan membahas 3 jenis metode:
+\begin{enumerate}
+\item Metode dari objek (object method)
+
+\item Metode dari class (class method)
+
+\item Metode secara static (static method)
+\end{enumerate}
+
+Pertama kita membahas metode dari objek, seperti yang sempat dijelaskan secara singkat di atas mengenai metode, atau dalam bahasa Inggris disebut method, secara umum metode adalah sebuah fungsi khusus yang menjadi “milik” suatu objek, yakni hasil instantiation dari class.\\
+
+Salah satu hal khusus yang dimiliki oleh metode dengan adanya argumen bernama self, Anda tentu bertanya-tanya tentang argumen self pada metode-metode dalam kelas tersebut sebetulnya apa?
+Argumen pertama dari metode-metode dalam class, biasa diberikan nama self sebagai suatu konvensi atau standar penamaan, meskipun Anda bisa juga menggunakan nama lain. Bahkan dalam Python tidak ada arti khusus tentang sintaksis self ini, namun sangat disarankan menggunakan konversi ini agar program Python yang Anda buat akan lebih mudah dimengerti oleh pemrogram lainnya. \\
+Seperti yang Anda sudah perkirakan, untuk sebuah metode, sebetulnya dikirimkan objek (hasil instance dari class) sebagai argumen pertamanya, dalam hal ini bernama self.\\
+
+Misalnya menggunakan contoh di atas, jika k adalah objek hasil instance dari class Kalkulator, saat melakukan pemanggilan metode f.\\
+
+\begin{lstlisting}[language=Python]
+k.f()
+\end{lstlisting}
+
+ekuivalen dengan
+
+\begin{lstlisting}[language=Python]
+Kalkulator.f(k)
+\end{lstlisting}
+
+Argumen self pada metode f akan diisi dengan objek hasil instance dari class Kalkulator.\\
+
+Sebelum kita membahas yang kedua dan ketiga, yakni metode dari class dan metode secara static, Anda tentu mengingat bahwa sebelumnya sudah belajar fungsi-fungsi bawaan (built-in) dari Python, antara lain: open, sorted, int, str, dan sejumlah lainnya. Terkait metode, ada dua fungsi bawaan yang akan kita bahas, yakni classmethod dan staticmethod.\\
+
+Classmethod adalah sebuah fungsi yang mengubah metode menjadi metode dari class (class method). Dalam penggunaannya, fungsi ini dijadikan sebagai fungsi decorator @classmethod, kemudian pemanggilannya bisa langsung dari class yang terdefinisi ataupun melalui objek.
+Metode dari class (class method) menerima masukan class secara implisit sebagai argumen pertama yang secara konvensi diberikan nama cls.\\
+
+Berdasar contoh yang sama dengan class sebelumnya, berikut adalah metode dari class.\\
+
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana"""
+ 
+    def f(self):
+        return 'hello world'
+ 
+    @classmethod
+    def tambah_angka(cls, angka1, angka2):
+        return '{} + {} = {}'.format(angka1, angka2, angka1 + angka2)
+\end{lstlisting}
+
+Nampak pada kode, sesuai konvensi ada metode yang menggunakan argumen pertama self, sedangkan untuk class method menggunakan konvensi argumen pertama cls. \\
+
+Untuk melakukan pemanggilan dari class, dilakukan seperti berikut, dimana argumen pertama cls sudah mendapatkan masukan class Kalkulator.\\
+
+\begin{lstlisting}[language=Python]
+Kalkulator.tambah_angka(1, 2)  # tanpa perlu memberikan masukan untuk argumen cls
+\end{lstlisting}
+
+Metode dari class (class method) juga dapat dipanggil dari objek, hasil instantiation dari class Kalkulator, contohnya mirip seperti pemanggilan metode dari objek (object method).
+
+\begin{lstlisting}[language=Python]
+k = Kalkulator()
+k.tambah_angka(1, 2)
+\end{lstlisting}
+
+Staticmethod adalah sebuah fungsi yang mengubah metode menjadi metode statis (static method). Dalam penggunaannya, fungsi ini dijadikan sebagai fungsi decorator @staticmethod, kemudian pemanggilannya bisa langsung dari class yang terdefinisi ataupun melalui objek.\\
+Metode statis (static method) tidak menerima masukan argumen pertama secara implisit.\\
+
+Untuk Anda yang pernah memrogram Java atau C++, metode statis ini mirip seperti yang ada di bahasa pemrograman tersebut.\\
+
+Berdasar contoh yang sama dengan class sebelumnya, berikut adalah metode statis.\\
+
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana"""
+ 
+    def f(self):
+        return 'hello world'
+ 
+    @staticmethod
+    def kali_angka(angka1, angka2):
+        return '{} x {} = {}'.format(angka1, angka2, angka1 * angka2)
+\end{lstlisting}
+
+Nampak pada kode, tidak ada argumen pertama yang implisit seperti halnya pada dua metode sebelumnya.\\
+
+Pemanggilan dari class seperti halnya pemanggilan fungsi biasa.\\
+
+\begin{lstlisting}[language=Python]
+a = Kalkulator.kali_angka(2, 3)
+print(a)
+\end{lstlisting}
+
+Metode statis (static method) juga dapat dipanggil dari objek, hasil instantiation dari class Kalkulator, mirip seperti pemanggilan fungsi biasa meskipun dipanggil dari objek.
+
+\begin{lstlisting}[language=Python]
+k = Kalkulator()
+a = k.kali_angka(2, 3)
+print(a)
+\end{lstlisting}
+
+\section{Mekanisme Pewarisan (Inheritance)}
+
+Paradigma Pemrograman Berorientasi Objek memiliki konsep pewarisan atau dalam bahasa Inggris disebut inheritance, tentunya di Python mendukung fitur ini.\\
+
+Suatu kelas B dapat mewarisi kelas A, sehingga secara otomatis memiliki semua fitur yang dimiliki oleh kelas A, dalam hal ini atribut-atribut dan metode-metode.\\
+
+Dalam contoh ini, kelas A disebut sebagai kelas dasar, yakni kelas yang memberikan warisan atau biasa juga disebut kelas yang diturunkan.\\
+
+Kemudian kelas B disebut sebagai kelas turunan, yakni kelas yang mendapatkan warisan.
+Jika di kelas B memiliki metode dengan nama yang sama dengan yang dimiliki kelas A, maka metode tersebut akan menimpa metode yang diwariskan dari kelas A.\\
+
+Catatan:\\
+
+Frasa kelas dasar adalah terjemahan bahasa Inggris dari frasa base class.\\
+
+Frasa kelas turunan adalah terjemahan bahasa Inggris dari frasa derived class.\\
+
+Frasa menimpa metode adalah terjemahan bahasa Inggris dari frasa method override.\\
+
+Di Python, mekanisme pewarisan memungkinkan untuk memiliki lebih dari satu kelas dasar (kelas orang tua, yang diwarisi)\\
+
+Kita akan mengembangkan aplikasi yang sudah dimiliki di atas, class Kalkulator sebagai kelas dasar yang mempunyai fungsi melakukan penambahan melalui metode tambah\_angka.\\
+
+\begin{lstlisting}[language=Python]
+class Kalkulator:
+    """contoh kelas kalkulator sederhana. anggap kelas ini tidak boleh diubah!"""
+ 
+    def __init__(self, nilai=0):
+        self.nilai = nilai
+ 
+    def tambah_angka(self, angka1, angka2):
+        self.nilai = angka1 + angka2
+        if self.nilai > 9:  # kalkulator sederhana hanya memroses sampai 9
+            print('kalkulator sederhana melebihi batas angka: {}'.format(self.nilai))
+        return self.nilai
+\end{lstlisting}
+
+Kemudian kita punya kebutuhan membuat sebuah kelas yang punya fitur perkalian tapi juga punya fitur penambahan, dalam contoh ini misalnya kita tidak boleh mengubah kalkulator yang sudah ada. Dibandingkan dengan membuat kelas baru kemudian menuliskan kembali implementasi penambahan angka, maka mewarisi kelas yang sudah ada akan lebih efisien.\\
+
+Dari situ, kita membuat class KalkulatorKali yang mewarisi class Kalkulator.
+
+\begin{lstlisting}[language=Python]
+class KalkulatorKali(Kalkulator):
+    """contoh mewarisi kelas kalkulator sederhana"""
+ 
+    def kali_angka(self, angka1, angka2):
+        self.nilai = angka1 * angka2
+        return self.nilai
+\end{lstlisting}
+
+Dengan pemanggilan class KalkulatorKali sebagai berikut.
+
+\begin{lstlisting}[language=Python]
+kk = KalkulatorKali()
+a = kk.kali_angka(2, 3)  # sesuai dengan definisi class memiliki fitur kali_angka
+print(a)
+ 
+b = kk.tambah_angka(5, 6)  # memiliki fitur tambah_angka karena mewarisi dari Kalkulator
+print(b)
+\end{lstlisting}
+
+Dengan melakukan pewarisan, Anda dengan mudah bisa menambahkan (extend) kemampuan dari suatu class dengan fitur yang ingin Anda buat sendiri. Hal tersebut akan sangat berguna jika Anda ingin membuat aplikasi yang mudah diguna-ulang (reusable).
+
+\section{Menimpa (Override) Metode dengan Nama yang Sama Dengan Kelas Dasar}
+
+Anda melihat bahwa kalkulator yang anda operasikan mendapatkan peringatan melebihi batas angka yang bisa diproses? Lalu bagaimana kalau Anda ingin mengubah keterbatasan itu? Meski dalam contoh ini anggap tetap tidak boleh mengubah class Kalkulator yang sudah ada.\\
+
+Dalam proses pewarisan, kita bisa menimpa (override) definisi metode yang dimiliki oleh kelas dasar (kelas orang tua, yang diwarisi) dengan nama metode yang sama. Misalnya kita menimpa metode tambah\_angka untuk menghilangkan batasan yang dimiliki.\\
+
+\begin{lstlisting}[language=Python]
+class KalkulatorKali(Kalkulator):
+    """contoh mewarisi kelas kalkulator sederhana"""
+ 
+    def kali_angka(self, angka1, angka2):
+        self.nilai = angka1 * angka2
+        return self.nilai
+ 
+    def tambah_angka(self, angka1, angka2):
+        self.nilai = angka1 + angka2
+        return self.nilai
+\end{lstlisting}
+
+Kemudian kita coba kembali, apakah batasan yang dimiliki sudah hilang?
+
+\begin{lstlisting}[language=Python]
+kk = KalkulatorKali()
+ 
+b = kk.tambah_angka(5, 6)  # fitur tambah_angka yang dipanggil milik KalkulatorKali
+print(b)
+\end{lstlisting}
+
+\section{Pemanggilan Metode Kelas Dasar dari Kelas Turunan dengan Sintaksis Super}
+
+Anggaplah fungsi tambah\_angka adalah sebuah fungsi yang rumit, dimana kita sebaiknya gunakan saja kemampuan yang sudah ada di kelas dasar, kemudian kita hanya ubah sebagian fiturnya saja dengan yang kita inginkan.
+\begin{lstlisting}[language=Python]
+class KalkulatorTambah(Kalkulator):
+    """contoh mewarisi kelas kalkulator sederhana"""
+ 
+    def tambah_angka(self, angka1, angka2):
+        if angka1 + angka2 <= 9:  # fitur ini sudah oke di kelas dasar, gunakan yang ada saja
+            super().tambah_angka(angka1, angka2)  # panggil fungsi dari Kalkulator lalu isi nilai
+        else:  # ini adalah fitur baru yang ingin diperbaiki dari keterbatasan kelas dasar
+            self.nilai = angka1 + angka2
+        return self.nilai
+\end{lstlisting}
+
+\section{Variabel Privat di Python}
+
+Jika Anda sebelumnya pernah belajar bahasa pemrograman yang memiliki variabel privat, dimana variabel tersebut tidak dapat diakses kecuali dari objek yang bersangkutan, di Python hal tersebut tidak ada.\\
+
+Terkait variabel privat tersebut, di Python ada konvensi dimana penggunaan nama yang diawali dengan garis bawah (underscore), baik itu fungsi, metode, maupun anggota data, akan dianggap sebagai non-publik.\\
+
+\section{Pernak-Pernik Terkait Struktur Data}
+
+Buat Anda yang pernah membuat program dengan menggunakan bahasa pemrograman C atau Pascal, Anda mungkin tertarik untuk membuat sebuah struktur data seperti halnya struct pada C atau record pada Pascal, bertujuan menyatukan sejumlah penamaan item data menjadi satu.\\
+
+Dalam Python, dimana Anda sebelumnya pernah mempelajari mengenai duck typing, maka Anda cukup mendefinisikan saja sebuah class kosong, selanjutnya penamaan item data dapat secara langsung didefinisikan dan diisikan saat sudah instantiation.
+
+\begin{lstlisting}[language=Python]
+class Pegawai:
+    pass  # definisi class kosong
+ 
+don = Pegawai()  # membuat Pegawai baru menjadi objek bernama don
+ 
+# tambahkan item data pada objek sebagai record
+don.nama = 'Don Doo'
+don.bagian = 'IT'
+don.gaji = 999
+\end{lstlisting}
+
+
+
+
+
+
+
