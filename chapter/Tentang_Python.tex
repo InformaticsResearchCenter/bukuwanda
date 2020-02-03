@@ -12,6 +12,365 @@ Perbedaan Python 2 dan Python 3 dapat dilihat pada gambar berikut.
 		\label{perbedaan}
 \end{figure}
 
+\subsection{Tipe Data}
+\begin{enumerate}
+ \item Numbers\\
+ Tipe numerik pada Python dibagi menjadi 3: int, float, complex
+ \begin{verbatim}
+a = 5
+print(a, "is of type", type(a))
+a = 2.0
+print(a, "is of type", type(a))
+a = 1+2j
+print(a, "is complex number?", isinstance(1+2j,complex))
+ \end{verbatim}
+ 
+ Output:
+ \begin{verbatim}
+ 5 is of type <class 'int'>
+2.0 is of type <class 'float'>
+(1+2j) is complex number? True
+ \end{verbatim}
+ Integer tidak dibatasi oleh angka atau panjang tertentu, namun dibatasi oleh memori yang tersedia. Sehingga Anda tidak perlu menggunakan variabel yang menampung big number misalnya long long (C/C++), biginteger, atau sejenisnya. Contoh kode untuk menunjukkan bahwa Python tidak membatasi output integer adalah pencarian bilangan ke-10.000 pada deret fibonacci (catatan: bilangan ke-10.000 pada deret fibonacci memiliki panjang 2.090 digit) sebagai berikut:
+ \begin{verbatim}
+ x=[0]*10005;              #inisialisasi array 0 sebanyak 10005; x[0]=0
+x[1]=1;                   #x[1]=1
+ 
+for j in range(2,10001):
+      x[j]=x[j-1]+x[j-2]  # Fibonacci
+print(x[10000])
+ \end{verbatim}
+ Output:\\
+ 33644764876431783266621612005107543310302148460680063906564769974680081442166662368155595513633734025\\
+ Perhatikan bagaimana Python melakukan pemotongan pada digit ke 16 pada variabel float b.Float atau bilangan pecahan dibatasi akurasinya pada 15 desimal. Yang membedakan Integer dan Float adalah titik (decimal points). Misalnya dalam penulisan angka 1 jenisnya Integer, tapi jika dituliskan sebagai 1.0 artinya berjenis Float atau pecahan.
+ \begin{verbatim}
+ b = 0.1234567890123456789
+b
+ \end{verbatim}
+ Output:\\
+ 0.12345678901234568
+ 
+ Karena Python banyak digunakan juga oleh matematikawan, tipe bilangan di Python juga mendukung bilangan imajiner dan bilangan kompleks. Nilai bilangan kompleks (complex) dituliskan dalam formulasi x + yj, yakni bagian x adalah bilangan real, dan y adalah bilangan imajiner. Contohnya adalah sebagai berikut:
+ \begin{verbatim}
+ a = 1234567890123456789
+a
+ \end{verbatim}
+ Output:\\
+ 1234567890123456789
+ 
+ \begin{verbatim}
+ c = 1+2j
+c
+ \end{verbatim}
+ Output:\\
+ (1+2j)
+ \item Strings\\
+ String adalah urutan dari karakter unicode. Dideklarasikan dengan petik tunggal atau ganda. String >1baris dapat ditandai dengan tiga petik tunggal atau ganda ''' atau """.
+ \begin{verbatim}
+ s = "This is a string"
+s = '''this is a multiline
+next new line (1)
+another new line (2)'''
+ \end{verbatim}
+ Seperti list dan tuple, slicing operator [ ] dapat digunakan pada string. Sebuah string utuh bersifat mutable, namun elemennya bersifat immutable.
+ \begin{verbatim}
+ s = "Hello World!"
+print(s[4])
+print(s[6:11])
+s[5]="d"
+ \end{verbatim}
+ Output:
+ \begin{verbatim}
+ 'o'
+'World'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
+ \end{verbatim}
+ \begin{verbatim}
+ s = "Hello World!"
+print(s)
+s= "Try Python!"
+print(s)
+ \end{verbatim}
+ Output:
+ \begin{verbatim}
+ 'Hello World!'
+'Try Python!'
+ \end{verbatim}
+ 
+ \item Bool/Boolean\\
+ Tipe data bool atau Boolean, merupakan turunan dari bilangan bulat (integer atau int) yang hanya punya dua nilai konstanta: True dan False.\\
+
+Nilai Boolean\\
+Nilai konstanta False dan True merepresentasikan nilai kebenaran (truth values), meskipun ada nilai-nilai lain yang juga dianggap benar atau salah. Di dalam konteks angka, misalnya digunakan sebagai argumen dari operator matematika aritmatika, kedua nilai ini berlaku seperti halnya bilangan bulat 0 dan 1, sesuai False dan True.\\
+
+Ada fungsi bawaan bool() yang dapat mengubah nilai menjadi nilai Boolean, apabila nilai tersebut dapat direpresentasikan sebagai nilai kebenaran (truth values). \\
+
+Nilai kebenaran adalah sebuah nilai yang dapat diuji sebagai benar atau salah, untuk digunakan di sintaksis kondisi if atau while atau sebagai operan dari operasi Boolean.\\
+
+Berikut adalah objek bawaan yang didefinisikan bernilai salah dalam pengujian nilai kebenaran:
+\begin{enumerate}
+\item Konstanta yang sudah didefinisikan bernilai salah: None dan False
+\item Angka nol dari semua tipe numeric: 0, 0.0, 0j, Decimal(0), Fraction(0, 1)
+\item Urutan (sequence) dan koleksi (collection) yang kosong: '', (), {}, set(), range(0)
+\end{enumerate}
+Untuk objek yang didefinisikan sendiri, representasi nilai Boolean akan bergantung dari definisi metode (method) khusus bernama \_\_bool\_\_(self). Jika metode ini mengembalikan True maka interpretasi nilai dari objeknya akan True, demikian juga sebaliknya.
+Operasi Boolean\\
+Operasi dan fungsi bawaan yang memiliki hasil Boolean akan selalu mengembalikan 0 atau False untuk yang bernilai salah, serta 1 atau True untuk yang bernilai benar, kecuali dinyatakan berbeda dalam dokumentasi.\\
+
+Operasi untuk tipe Boolean akan dijelaskan lebih lanjut di modul Operator, Operands, dan Expressions.
+
+\item List\\
+List adalah jenis kumpulan data terurut (ordered sequence), dan merupakan salah satu variabel yang sering digunakan pada Python. Serupa, namun tak sama dengan array pada bahasa pemrograman lainnya. Bedanya, elemen List pada Python tidak harus memiliki tipe data yang sama. Mendeklarasikan List cukup mudah dengan kurung siku dan elemen yang dipisahkan dengan koma. Setiap data didalamnya dapat diakses dengan indeks yang dimulai dari 0.
+\begin{verbatim}
+a = [1, 2.2, 'python']
+\end{verbatim}
+Python mengenal slicing operator [] yang dapat melakukan ekstraksi sebuah item atau beberapa item yang berada dalam range tertentu pada tipe data urutan (sequences), misalnya list, string dan tuple. Beberapa tipe urutan juga mendukung "extended slicing" dengan parameter ketiga berupa "step".\\
+x[0] artinya mengambil elemen paling awal, dengan index 0 dari List x\\
+
+x[5] artinya mengambil elemen dengan index 5 dari List x\\
+
+x[-1] artinya mengambil elemen dengan index paling belakang ke-1 dari List x\\
+
+x[3:5] artinya membuat list dari anggota elemen List x dengan index 3 hingga sebelum index 5 (tidak termasuk elemen dengan index 5, dalam hal ini hanya index 3-4)\\
+
+x[:5] artinya membuat list dari anggota elemen List x paling awal hingga sebelum index 5 (tidak termasuk elemen dengan index 5, dalam hal ini hanya index 0-4)\\
+
+x[-3:] artinya membuat list dari anggota elemen List x mulai index ke-3 dari belakang hingga paling belakang\\
+
+x[1:7:2] artinya membuat list dari anggota elemen List x dengan index 1 hingga sebelum index 5, dengan "step" 2 (dalam hal ini hanya index 1, 3, 5)
+\begin{verbatim}
+x = [5,10,15,20,25,30,35,40]
+print(x[5])
+print(x[-1])
+print(x[3:5])
+print(x[:5])
+print(x[-3:])
+print(x[1:7:2])
+\end{verbatim}
+Output:
+\begin{verbatim}
+30
+40
+[20, 25]
+[5, 10, 15, 20, 25]
+[30, 35, 40]
+[10, 20, 30]
+\end{verbatim}
+
+Elemen pada list dapat diubah atau ditambahkan. Misalnya untuk melakukan perubahan kemudian penambahan:
+\begin{verbatim}
+x = [1,2,3]
+x[2]=4
+x
+\end{verbatim}
+Output:
+\begin{verbatim}
+[1, 2, 4]
+\end{verbatim}
+\begin{verbatim}
+x.append(5)
+x
+\end{verbatim}
+Output:
+\begin{verbatim}
+[1, 2, 4, 5]
+\end{verbatim}
+
+Untuk menghapus, gunakan fungsi del
+\begin{verbatim}
+spam = ['cat', 'bat', 'rat', 'elephant']
+del spam[2]
+spam
+\end{verbatim}
+Output:
+\begin{verbatim}
+['cat', 'bat', 'elephant']
+\end{verbatim}
+
+\begin{verbatim}
+del spam[2]
+spam
+\end{verbatim}
+Output:
+\begin{verbatim}
+['cat', 'bat']
+\end{verbatim}
+
+\item Tuple\\
+Tuple adalah jenis dari list yang tidak dapat diubah elemennya. Umumnya tuple digunakan untuk data yang bersifat sekali tulis, dan dapat dieksekusi lebih cepat. Tuple didefinisikan dengan kurung dan elemen yang dipisahkan dengan koma.
+\begin{verbatim}
+t = (5,'program', 1+3j)
+\end{verbatim}
+Seperti list, kita dapat melakukan slicing, namun pada tuple kita tidak dapat melakukan perubahan:
+\begin{verbatim}
+t = (5,'program', 1+3j)
+t[1]
+t[0:3]
+t[0]=10
+\end{verbatim}
+Output:
+\begin{verbatim}
+'program'
+(5, 'program', (1+3j))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+\end{verbatim}
+
+
+\item Set\\
+Set adalah kumpulan item bersifat unik dan tanpa urutan (unordered collection). Didefinisikan dengan kurawal dan elemennya dipisahkan dengan koma. Pada Set kita dapat melakukan union dan intersection, sekaligus otomatis melakukan penghapusan data duplikat.
+
+\begin{verbatim}
+a = {1,2,2,3,3,3}
+a
+\end{verbatim}
+Output:
+\begin{verbatim}
+{1, 2, 3}
+\end{verbatim}
+
+Karena set bersifat unordered, maka kita tidak bisa mengambil sebagian data / elemen datanya menggunakan proses slicing.
+\begin{verbatim}
+a = {1,2,3}
+a[1]
+\end{verbatim}
+Output:
+\begin{verbatim}
+Traceback (most recent call last):
+ File "<string>", line 301, in runcode
+ File "<interactive input>", line 1, in <module>
+TypeError: 'set' object does not support indexing
+\end{verbatim}
+
+\item Dictionary\\
+Dictionary pada Python adalah kumpulan pasangan kunci-nilai (pair of key-value) yang bersifat tidak berurutan. Dictionary dapat digunakan untuk menyimpan data kecil hingga besar. Untuk mengakses datanya, kita harus mengetahui kuncinya (key). Pada Python, dictionary didefinisikan dengan kurawal dan tambahan definisi berikut:
+\begin{enumerate}
+\item Setiap elemen pair key-value dipisahkan dengan koma (,)
+\item Key dan Value dipisahkan dengan titik dua (:)
+\item Key dan Value dapat berupa tipe variabel/obyek apapun
+\end{enumerate}
+
+\begin{verbatim}
+d = {1:'value','key':2}
+print(type(d))
+\end{verbatim}
+Output:
+\begin{verbatim}
+
+<class 'dict'>
+
+\end{verbatim}
+
+\begin{verbatim}
+d = {1:'value','key':2}
+print(type(d))
+print("d[1] = ", d[1]);
+print("d['key'] = ", d['key']);
+\end{verbatim}
+
+Output:
+\begin{verbatim}
+<class 'dict'>
+d[1] = value
+d['key'] =  2
+\end{verbatim}
+Dictionary bukan termasuk dalam implementasi urutan (sequences), sehingga tidak bisa dipanggil dengan urutan indeks. Misalnya dalam contoh berikut dicoba dengan indeks 2, tetapi menghasilkan error (KeyError) karena tidak ada kunci (key) 2:
+
+\begin{verbatim}
+d = {1:'value','key':2}
+print(type(d))
+print("d[1] = ", d[1]);
+print("d['key'] = ", d['key']);
+ 
+# Generates error
+print("d[2] = ", d[2]);
+\end{verbatim}
+
+Output:
+\begin{verbatim}
+<class 'dict'>
+d[1] = value
+d['key'] = 2
+
+---------------------------------------------------------------------------
+KeyError Traceback (most recent call last)
+<ipython-input-7-4b566e677ca2> in <module>()
+1 d = {1:'value','key':2}
+----> 2 print("d[2] = ", d[2]);
+
+KeyError: 2
+\end{verbatim}
+
+\end{enumerate}
+
+\subsection{Konversi antar tipe data}
+Kita dapat melakukan konversi tipe data bawaan dengan menggunakan fungsi konversi tipe bawaan (standard type) misalnya: int(), float(), str(), dll.
+Contoh:\\
+float(5)\\
+Output:\\
+5.0\\
+Konversi float ke int akan bersifat floor/truncating, menghilangkan nilai di belakang koma.\\
+Contoh:\\
+int(10.6)\\
+Output:\\
+10\\
+int(-10.6)\\
+Output:\\
+-10\\
+Konversi dari-dan-ke string akan melalui pengujian dan dipastikan validitasnya.\\
+float('2.5')\\
+Output:\\
+2.5\\
+str(25)\\
+Output:\\
+'25'\\
+int('1p')\\
+Output:
+\begin{verbatim}
+Traceback (most recent call last):
+ File "<string>", line 301, in runcode
+ File "<interactive input>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: '1p'
+\end{verbatim}
+
+Anda juga dapat melakukan konversi kumpulan data (set, list, tuple).\\
+set([1,2,3])\\
+Output:\\
+
+{1, 2, 3}\\
+tuple({5,6,7})\\
+Output:\\
+
+(5, 6, 7)\\
+list('hello')\\
+Output:\\
+
+['h', 'e', 'l', 'l', 'o']\\
+
+Untuk konversi ke dictionary, data harus memenuhi persyaratan key-value. Berikut adalah dua contoh konversi:\\
+List dari beberapa List yang isinya pasangan nilai menjadi Dictionary. \\
+
+Serta konversi List dari beberapa Tuple yang isinya pasangan nilai menjadi Dictionary.\\
+dict([[1,2],[3,4]])\\
+Output:\\
+
+{1: 2, 3: 4}\\
+dict([(3,26),(4,44)])\\
+Output:\\
+
+{3: 26, 4: 44}\\
+
+
+
+
+
+
+
+
+
 \subsection{Implementasi dan Penggunaan Python di Perusahaan Dunia}
 \begin{enumerate}
 \item spotify 
@@ -339,7 +698,156 @@ Selanjutnya, mari kita lakukan print hanya terhadap digit ganjil pada angka 1184
 Praktek terakhir adalah menampilkan hasil dari bilangan prima angka 1184011 dengan cara apabila angka 1184011 memiliki angka yang merupakan angka prima maka akan ditampilkan, logika yang akan diterapkan adalah apabila angka kecil sama dengan angka 1 maka angka tersebut bukan bilangan prima. Jika angka 1184011 dibagi 2 setelah itu dibagi dengan angka itu sendiri dan menghasilkan sisa bagi sama dengan 0, maka angka tersebut bukan bilangan prima
 \lstinputlisting[caption=Bilangan Prima NPM , language=Python, firstline=110, lastline=126]{src/1184011.py}
 
-\section{Peringatan Error dan Cara Mengatasinya}
+\section{Penanganan Kesalahan (Error and Exception Handling)}
+Ada setidaknya dua jenis kesalahan berdasarkan kejadiannya: \\
+\begin{enumerate}
+\item Kesalahan sintaksis (syntax errors) atau sering disebut kesalahan penguraian (parsing errors)
+\item Pengecualian (exceptions) atau sering disebut kesalahan saat beroperasi (runtime errors)
+\end{enumerate}
+Kesalahan sintaksis terjadi ketika Python tidak dapat mengerti apa yang Anda perintahkan. Sedangkan pengecualian (kesalahan saat beroperasi) terjadi ketika Python mengerti apa yang Anda perintahkan tetapi mendapatkan masalah saat mengikuti yang Anda perintahkan (terjadi saat aplikasi sudah mulai beroperasi).
+
+\subsection{Kesalahan Sintaksis}
+Kesalahan sintaksis biasanya sering terjadi saat Anda masih baru memulai belajar Python, misalnya contoh berikut adalah penempatan indentasi (spasi di awal) yang tidak sesuai.
+\begin{verbatim}
+print('salah indentasi')
+ File "<stdin>", line 1
+   print('salah indentasi')
+   ^
+IndentationError: unexpected indent
+\end{verbatim}
+Contoh berikut ini menampilkan kesalahan sintaksis, dimana setelah kondisi dari perintah while diharuskan ada tanda titik dua (:).\\
+\begin{verbatim}
+while True print('Hello world')
+ File "<stdin>", line 1
+   while True print('Hello world')
+                  ^
+SyntaxError: invalid syntax
+\end{verbatim}
+
+ada kesalahan sintaksis, baris dimana kesalahan terdeteksi dimunculkan kembali, kemudian terdapat tanda panah yang menunjukkan titik paling awal dari kesalahan.\\
+
+Kedua contoh di atas memiliki kelompok (tipe) kesalahan yang berbeda, yang pertama adalah IndentationError dan yang kedua adalah SyntaxError. Kemudian setelah penyebutannya, ada pesan detail kesalahan (keterangan), misalnya indentasi yang tidak diharapkan (unexpected).\\
+
+Jika Anda menggunakan mode pemanggilan skrip, nama file skrip dan nomor baris dimana terjadi kesalahan akan dimunculkan. Sedangkan untuk mode interaktif pada dua contoh di atas, nama file muncul sebagai “<stdin>”. Berikut adalah contoh pada pemanggilan skrip bernama contoh\_salah\_sintaksis.py dimana terjadi kesalahan pada baris 2.\\
+
+\begin{verbatim}
+python contoh_salah_sintaksis.py  
+ File "contoh_salah_sintaksis.py", line 2
+   if True print('salah sintaksis')
+               ^
+SyntaxError: invalid syntax
+\end{verbatim}
+
+\subsection{Pengecualian}
+Meski pernyataan atau ekspresi dari Python sudah Anda tulis dengan benar, ada kemungkinan terjadi kesalahan ketika perintah tersebut dieksekusi. Kesalahan yang terjadi saat proses sedang berlangsung disebut pengecualian (exceptions) dan akan berakibat fatal jika tidak ditangani. Kebanyakan pengecualian di Python tidak ditangani oleh aplikasi, sehingga aplikasi terhenti kemudian muncul pesan kesalahan seperti contoh berikut.\\
+\begin{verbatim}
+print(angka)
+Traceback (most recent call last):
+ File "<stdin>", line 1, in <module>
+NameError: name 'angka' is not defined
+\end{verbatim}
+Misalkan Anda lupa memberikan nilai pada variabel angka, tetapi Anda langsung memanggil variabel tersebut. Secara sintaksis sudah sesuai, tapi muncul pengecualian dengan kelompok (tipe) kesalahan NameError dan pesan detail kesalahan yang menyatakan bahwa variabel angka tidak terdefinisi.\\
+
+Contoh lain terkait pengecualian yang sering juga terjadi adalah operasi dari variabel yang jenisnya tidak sesuai, misalnya contoh berikut.\\
+
+\begin{verbatim}
+bukan_angka = '1'
+bukan_angka + 2
+Traceback (most recent call last):
+ File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+\end{verbatim}
+Pada contoh tersebut, variabel bukan\_angka berjenis string, sehingga saat mengoperasikan variabel tersebut dengan angka (berjenis integer), meskipun secara sintaksis sudah sesuai, muncul pengecualian dengan kelompok (tipe) kesalahan TypeError dan pesan detail kesalahan yang menyatakan bahwa operasi penambahan untuk string (contatetation) hanya bisa dilakukan jika kedua operannya adalah string (dan bukan integer).\\
+
+Seperti terlihat bahwa pada saat terjadi pengecualian, informasi yang muncul seperti saat terjadi kesalahan (errors), termasuk juga informasi nama file dan nomor baris dimana kesalahan terjadi.\\
+
+\subsection{Penanganan Pengecualian}
+
+Pada aplikasi Python yang Anda buat bisa dilengkapi dengan penanganan terhadap pengecualian (exceptions handling) dari kelompok (tipe) kesalahan yang Anda tentukan. Proses penanganan pengecualian menggunakan pernyataan try yang berpasangan dengan except.\\
+
+Misalnya kita ingin menangani pengecualian yang terjadi jika ada pembagian angka dengan nilai nol (0).\\
+\begin{verbatim}
+z = 0
+1 / z
+Traceback (most recent call last):
+ File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+ 
+try:
+... x = 1 / z
+... print(x)
+... except ZeroDivisionError:
+...     print('tidak bisa membagi angka dengan nilai nol')
+...  
+tidak bisa membagi angka dengan nilai nol
+\end{verbatim}
+
+Perhatikan bahwa operasi aplikasi berhenti di x = 1 / z, sedangkan bagian print(x) tidak sempat dioperasikan, karena aplikasi sudah mengalami pengecualian, sehingga yang tercetak adalah operasi print(‘tidak bisa membagi angka dengan nilai nol’).\\
+
+Pada operasi yang dicontohkan di atas, penanganan pengecualian untuk ZeroDivisionError dilakukan sehingga aplikasi tidak lagi keluar dari eksekusi karena kesalahan, tapi digantikan dengan mencetak pesan ke layar. Pada contoh ini kita fokus pada penanganan pengecualian, meskipun ada cara lain untuk menyelesaikannya, misal menggunakan kondisi (percabangan) untuk menghindari nilai nol.\\
+
+Pernyataan except dilanjutkan dengan kelompok (tipe) kesalahan yang ingin ditangani, atau bisa juga berupa tuple dari satu atau lebih tipe kesalahan yang akan ditangani. Di contoh berikut, menangani FileNotFoundError sebagai tuple satu elemen, jangan lupa dalam menuliskan tuple satu elemen harus tetap diakhiri dengan koma.\\
+\begin{verbatim}
+>>> try:
+...     with open('contoh_tidak_ada.py') as file:                   
+...         print(file.read())                          
+... except (FileNotFoundError, ):
+...     print('file tidak ditemukan')
+...  
+file tidak ditemukan
+\end{verbatim}
+
+Pada operasi di atas, aplikasi akan membuka dan mengakses file bernama contoh\_tidak\_ada.py, tetapi file tersebut tidak ada di direktori dimana aplikasi Python tersebut berada, selanjutnya akan terjadi pengecualian (exceptions) tetapi ditangani, dalam pasangan pernyataan try dan except, sehingga aplikasi tidak terhenti tetapi tercetak di layar bahwa file tidak ditemukan.\\
+
+Dalam aplikasi yang lebih kompleks, penanganan pengecualian dapat menggunakan pernyataan except lebih dari satu. Di contoh berikutnya akan menggunakan pernyataan except lebih dari satu (untuk satu pernyataan try), maupun menggunakan satu pernyataan except yang menangani lebih dari satu tipe kesalahan yang digabung dalam sebuah tuple.\\
+
+\begin{verbatim}
+>>> d = {'ratarata': '10.0'}
+>>> try:
+...     print('rata-rata: {}'.format(d['rata_rata']))
+... except KeyError:                                 
+...     print('kunci tidak ditemukan di dictionary')
+... except ValueError:              
+...     print('nilai tidak sesuai')
+...  
+kunci tidak ditemukan di dictionary
+>>> try:
+...     print('rata-rata: {}'.format(d['ratarata']/3))
+... except KeyError:                                 
+...     print('kunci tidak ditemukan di dictionary')
+... except (ValueError, TypeError):
+...     print('nilai atau tipe tidak sesuai')
+...  
+nilai atau tipe tidak sesuai
+>>> try:
+...     print('pembulatan rata-rata: {}'.format(int(d['ratarata'])))
+... except (ValueError, TypeError) as e:         
+...     print('penangan kesalahan: {}'.format(e))
+...  
+penangan kesalahan: invalid literal for int() with base 10: '10.0'
+\end{verbatim}
+
+Pada contoh tersebut, yang paling awal terjadi pengecualian untuk tipe kesalahan KeyError karena dalam dictionary d tidak memiliki kunci (key) rata\_rata, yang ada adalah kunci ratarata.\\
+
+Kemudian contoh selanjutnya terjadi pengecualian untuk tipe kesalahan TypeError karena nilai d[‘ratarata’] memiliki tipe string, sehingga tidak dapat dibagi dengan integer (angka) 3. Dalam penanganan kesalahannya, satu buah pernyataan except menangani tipe kesalahan ValueError atau TypeError, sehingga cocok salah satunya akan menampilkan ke layar bahwa nilai atau tipe tidak sesuai.\\
+
+Di bagian paling akhir contoh, terjadi pengecualian untuk tipe kesalahan ValueError karena berusaha melakukan konversi (casting) dari sebuah string ke integer dengan format yang tidak sesuai (bilangan bulat seharusnya tidak memiliki titik dalam penulisannya). Dalam penulisan penanganan kesalahannya digunakan variasi lain untuk mendapatkan pesan kesalahan sebagai variabel e untuk kemudian variabel tersebut dicetak dalam pesan yang ditampilkan ke layar.\\
+
+\subsection{Menghasilkan Pengecualian} 
+Dalam membuat aplikasi, ada kemungkinan Anda butuh untuk menghasilkan pengecualian (raise exceptions), salah satu caranya bisa dengan menggunakan pengecualian yang sudah ada, hanya ditambahkan informasi detailnya saja.\\
+
+Misalnya dalam contoh berikut, Anda mewajibkan sebuah dictionary memiliki kunci (key) total.\\
+
+\begin{verbatim}
+>>> d = {'ratarata': '10.0'}
+>>> if 'total' not in d:                                                                                                                         
+...     raise KeyError('harus memiliki total')                                                                           
+...                                                                                                                                              
+Traceback (most recent call last):                                                                                                               
+ File "<stdin>", line 2, in <module>                                                                                                            
+KeyError: 'harus memiliki total'
+\end{verbatim}
+
 \begin{enumerate}
  \item NameError, terjadi apabila kode mengeksekusi nama yang tidak terdefenisikan. Contoh:
  \begin{verbatim}
